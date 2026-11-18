@@ -1,12 +1,10 @@
 from django.contrib import admin
 
-from .models import Category, Location, Post
+from .models import Category, Comment, Location, Post
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    """Настройка панели администратора для модели Category."""
-
     list_display = (
         'title',
         'slug',
@@ -20,8 +18,6 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
-    """Настройка панели администратора для модели Location."""
-
     list_display = (
         'name',
         'is_published',
@@ -34,8 +30,6 @@ class LocationAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    """Настройка панели администратора для модели Post."""
-
     list_display = (
         'title',
         'pub_date',
@@ -55,3 +49,15 @@ class PostAdmin(admin.ModelAdmin):
         'category',
         'location',
     )
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = (
+        'text',
+        'post',
+        'author',
+        'created_at',
+    )
+    search_fields = ('text',)
+    list_filter = ('created_at', 'author')
